@@ -1,0 +1,42 @@
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Update local database
+    apt:
+       update_cache: true
+  - name: Download dependencies
+    apt:
+      name: apt-transport-https
+      state: latest
+      update_cache: true
+  - name: Download dependencies
+    apt:
+      name: ca-certificates
+      state: latest
+      update_cache: true
+  - name: Download dependencies
+    apt:
+      name: curl
+      state: latest
+      update_cache: true
+  - name: Download dependencies
+    apt:
+      name: software-properties-common
+      state: latest
+      update_cache: true
+  - name: docker gpg key
+    apt_key:
+      url: "https://download.docker.com/linux/ubuntu/gpg"
+      state: present
+  - name: docker apt repo
+    apt_repository:
+      repo: "deb [arch=amd64] https://download.docker.com/linux/debian stretch stable"
+      state: present
+  - name: Update repositories
+    apt:
+      update_cache: true
+  - name: Docker install
+    apt:
+      name: docker-ce
+      state: latest
+      update_cache: true
