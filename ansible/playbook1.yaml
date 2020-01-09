@@ -1,0 +1,13 @@
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+  - name: Install git
+    apt:
+      name: git
+      state: present
+      update_cache: yes
+  - name: Clone git repo
+    git:
+      repo: 'https://github.com/Matt25969/SelfReflection.git'
+      dest: /home/amoghvnaik/repo
